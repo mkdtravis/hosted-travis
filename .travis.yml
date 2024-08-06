@@ -1,41 +1,29 @@
-language: node_js
-os:
-  - linux
-  - osx
-dist: trusty
-node_js:
-  - 12.1.0
-
-install:
-  - npm install
-
 stages:
-  - name: Test
-  - name: Integration tests
-  - name: Build
+  - Test
 
 jobs:
   include:
     - stage: Test
       os: osx
       osx_image: xcode14.2
-      before_script:
-        - export FIREFOX_BIN=$(which firefox)
-      script:
-        - npm run test:all
-
-    - stage: Test
-      os: linux
       addons:
         chrome: stable
         firefox: latest
-      script:
-        - npm run test:all
+      env:
+        - BROWSERS=ChromeHeadless,Firefox
+        - MOZ_HEADLESS=1
 
-    - stage: Integration tests
-      script:
-        - echo "Running integration tests" # Placeholder for actual integration test script
+    - stage: Test
+      os: linux
+      dist: bionic
+      before_script:
+        - sh -e /etc/init.d/xvfb start
+      addons:
+        chrome: stable
+        firefox: latest
+      env:
+        - BROWSERS=Chrome,Firefox
+        - MOZ_HEADLESS=1
 
-    - stage: Build
-      script:
-        - echo "Running build process" # Placeholder for actual build script
+global:
+  - MOZ_HEADLESS=1
