@@ -1,29 +1,22 @@
-# Travis CI configuration file for deploying to GitHub Pages
+# Travis CI configuration file for GitHub Pages deployment
 
-# Specify the environment
+# Specify the build environment
 group: container
-dist: jammy  # Use Ubuntu 22.04 (Jammy Jellyfish)
-language: generic  # No specific language required for this build
+dist: jammy
+language: generic
 
-# Install any dependencies if needed
-install:
-  - echo "No dependencies to install"
+# If you're building the site before deployment (e.g., using Jekyll)
+script:
+  - echo "Building the site"
+  - jekyll build -d docs  # If you're generating the site, place the output in 'docs'
 
 # Deployment configuration
 deploy:
   provider: pages
-  skip_cleanup: true  # Ensures the build directory isn't cleaned up before deployment
-  github_token: $GITHUB_TOKEN  # GitHub personal access token stored in Travis CI settings as an environment variable
-  keep_history: true  # Keep commit history for the gh-pages branch
-  local_dir: docs  # Specify the directory to deploy (matches your GitHub Pages /docs setting)
+  skip_cleanup: true  # Prevent Travis from cleaning up files before deployment
+  github_token: $GITHUB_TOKEN  # GitHub token for authentication
+  keep_history: true  # Retain commit history on gh-pages
+  local_dir: docs  # Directory to deploy (this should match the GitHub Pages source, /docs)
   on:
-    branch: main  # Deploy only when changes are pushed to the main branch
-  verbose: true  # Enable verbose output for easier debugging
-
-# Optional script to build the site before deployment
-script:
-  - echo "Building the site (if necessary)"
-
-# Optionally clean up files before the build starts
-before_install:
-  - echo "Starting Travis CI build"
+    branch: main  # Only deploy on changes to the main branch
+  verbose: true  # Enable verbose output for debugging
