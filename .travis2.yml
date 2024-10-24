@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "14"
+
+# Only deploy from the main branch
+branches:
+  only:
+    - main
+
+script:
+  - echo "Testing deployment with dpl" > index.html
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in Travis CI settings
+  local_dir: .
+  on:
+    branch: main
