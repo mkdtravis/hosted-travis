@@ -1,0 +1,22 @@
+# Travis CI configuration file for GitHub Pages deployment
+
+# Specify the build environment
+group: container
+dist: jammy
+language: generic
+
+# If you're building the site before deployment (e.g., using Jekyll)
+script:
+  - echo "Building the site"
+  - jekyll build -d docs  # If you're generating the site, place the output in 'docs'
+
+# Deployment configuration
+deploy:
+  provider: pages
+  skip_cleanup: true  # Prevent Travis from cleaning up files before deployment
+  github_token: $GITHUB_TOKEN  # GitHub token for authentication
+  keep_history: true  # Retain commit history on gh-pages
+  local_dir: docs  # Directory to deploy (this should match the GitHub Pages source, /docs)
+  on:
+    branch: main  # Only deploy on changes to the main branch
+  verbose: true  # Enable verbose output for debugging
