@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "14"
+
+# Specify Ruby version compatible with older dpl
+rvm:
+  - 2.7.6
+
+branches:
+  only:
+    - main
+
+script:
+  - echo "Testing deployment with dpl" > index.html
+
+before_deploy:
+  - gem install dpl -v 1.10.16
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in Travis CI settings
+  local_dir: .
+  on:
+    branch: main
