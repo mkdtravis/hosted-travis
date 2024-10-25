@@ -2,13 +2,19 @@ language: node_js
 node_js:
   - "14"
 
-# Only deploy from the main branch
+# Specify Ruby version compatible with older dpl
+rvm:
+  - 2.7.6
+
 branches:
   only:
     - main
 
 script:
   - echo "Testing deployment with dpl" > index.html
+
+before_deploy:
+  - gem install dpl -v 1.10.16
 
 deploy:
   provider: pages
@@ -17,4 +23,3 @@ deploy:
   local_dir: .
   on:
     branch: main
-    ##
