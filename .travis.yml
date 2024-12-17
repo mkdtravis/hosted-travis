@@ -6,5 +6,6 @@ go:
   - 1.22.x
   - master
   - stable
+install: skip
 script:
   - echo "Hello"
