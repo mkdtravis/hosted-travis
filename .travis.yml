@@ -1,25 +1,22 @@
+os: linux
+node_js: node
 language: node_js
-node_js:
-  - "14"
-
-# Specify Ruby version compatible with older dpl
-rvm:
-  - 2.7.6
-
-branches:
-  only:
-    - main
-
+dist: focal
 script:
-  - echo "Testing deployment with dpl" > index.html
-
-before_deploy:
-  - gem install dpl -v 1.10.16
-
+- ".bin/create-index.sh"
+cache:
+directories:
+- node_modules
+group: stable
+addons:
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in Travis CI settings
-  local_dir: .
-  on:
-    branch: main
+- provider: pages
+strategy: git
+skip_cleanup: true
+local_dir: ".pages"
+target_branch: pages
+'on':
+branch:
+- feat/travis
+token: "$GITHUB_TOKEN"
+url: github.com
