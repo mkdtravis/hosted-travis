@@ -3,21 +3,19 @@ node_js: node
 language: node_js
 dist: focal
 script:
-- ".bin/create-index.sh"
+  - ".bin/create-index.sh"
 cache:
-directories:
-- node_modules
+  directories:
+    - node_modules
 group: stable
 addons:
 deploy:
-- provider: pages
-strategy: git
-skip_cleanup: true
-local_dir: ".pages"
-target_branch: gh-pages
-'on':
-branch:
-- feat/travis
-- main
-token: "$GITHUB_TOKEN"
-url: github.com
+  provider: pages
+  skip_cleanup: true
+  local_dir: ".pages"
+  target_branch: gh-pages
+  token: "$GITHUB_TOKEN"
+on:
+  branch:
+    - feat/travis
+    - main
