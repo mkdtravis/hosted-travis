@@ -3,7 +3,7 @@ node_js: node
 language: node_js
 dist: focal
 script:
-  - ".bin/create-index.sh"
+  - "bin/create-index.sh"
 cache:
   directories:
     - node_modules
