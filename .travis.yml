@@ -14,7 +14,7 @@ deploy:
 strategy: git
 skip_cleanup: true
 local_dir: ".pages"
-target_branch: pages
+target_branch: gh-pages
 'on':
 branch:
 - feat/travis
