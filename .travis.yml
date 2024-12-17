@@ -1,0 +1,21 @@
+os: linux
+node_js: node
+language: node_js
+dist: focal
+script:
+  - ".bin/create-index.sh"
+cache:
+  directories:
+    - node_modules
+group: stable
+addons:
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: ".pages"
+  target_branch: gh-pages
+  token: "$GITHUB_TOKEN"
+on:
+  branch:
+    - feat/travis
+    - main
