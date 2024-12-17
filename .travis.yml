@@ -1,6 +1,8 @@
 dist: focal
 language: go
-go:
+go: 
+  - "1.20"
+  - "1.20.x"
   - 1.20
   - 1.20.x
   - 1.21.x
