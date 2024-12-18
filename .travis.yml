@@ -17,5 +17,4 @@ deploy:
   token: "$GITHUB_TOKEN"
 on:
   branch:
-    - feat/travis
-    - main
+   - main
