@@ -3,7 +3,7 @@ node_js: node
 language: node_js
 dist: focal
 script:
-  - "bin/create-index.sh"
+  - echo "Testing deployment with dpl" > index.html
 cache:
   directories:
     - node_modules
