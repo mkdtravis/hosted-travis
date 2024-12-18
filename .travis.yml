@@ -12,7 +12,7 @@ addons:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: ".pages"
+  local_dir: "."
   target_branch: gh-pages
   token: "$GITHUB_TOKEN"
 on:
