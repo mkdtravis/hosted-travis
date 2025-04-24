@@ -1,24 +1,17 @@
 language: java
+dist: focal
+jdk:
+  - openjdk21
 
-jobs:
-  include:
-    - name: "Ubuntu Bionic (18.04) with OpenJDK 21"
-      dist: bionic
-      jdk: openjdk21
-      before_install:
-        - echo "[BIONIC] JAVA_HOME = $JAVA_HOME"
-        - java -version || echo "Failed to run java -version"
+before_install:
+  - echo "=== CHECK JAVA CONFIG ==="
+  - echo "JAVA_HOME = $JAVA_HOME"
+  - echo "which java = $(which java)"
+  - echo "resolved java = $(readlink -f $(which java))"
+  - java -Xmx32m -version || echo "[ERROR] java not working"
+  - javac -J-Xmx32m -version || echo "[ERROR] javac not working"
 
-    - name: "Ubuntu Focal (20.04) with OpenJDK 21"
-      dist: focal
-      jdk: openjdk21
-      before_install:
-        - echo "[FOCAL] JAVA_HOME = $JAVA_HOME"
-        - java -version || echo "Failed to run java -version"
-
-    - name: "Ubuntu Jammy (22.04) with OpenJDK 21"
-      dist: jammy
-      jdk: openjdk21
-      before_install:
-        - echo "[JAMMY] JAVA_HOME = $JAVA_HOME"
-        - java -version || echo "Failed to run java -version"
+  # Simulate what breaks when JAVA_HOME is not correct
+  - echo "=== TRY TO RUN SOMETHING THAT RELIES ON JAVA_HOME ==="
+  - if [ -z "$JAVA_HOME" ] || [ ! -x "$JAVA_HOME/bin/java" ]; then echo "[FAIL] JAVA_HOME is not correctly set"; exit 1; fi
+  - "$JAVA_HOME/bin/java" -version || echo "[FAIL] Direct call to JAVA_HOME failed"
