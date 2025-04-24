@@ -12,10 +12,10 @@ jobs:
     - dist: focal
     - dist: jammy
     - dist: bionic
-       group: previous
+      group: previous
     - dist: focal
-       group: previous
+      group: previous
     - dist: jammy
-       group: previous
+      group: previous
 
 
