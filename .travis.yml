@@ -6,4 +6,16 @@ jdk:
 install: skip
 script: java -version
 
+jobs:
+  include:
+    - dist: bionic
+    - dist: focal
+    - dist: jammy
+    - dist: bionic
+       group: previous
+    - dist: focal
+       group: previous
+    - dist: jammy
+       group: previous
+
 
