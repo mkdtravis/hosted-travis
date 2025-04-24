@@ -9,6 +9,7 @@ script: java -version
 jobs:
   include:
     - dist: bionic
+    - dist: xenial
     - dist: focal
     - dist: jammy
     - dist: bionic
@@ -16,6 +17,8 @@ jobs:
     - dist: focal
       group: previous
     - dist: jammy
+      group: previous
+    - dist: xenial
       group: previous
 
 
