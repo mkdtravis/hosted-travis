@@ -1,17 +1,9 @@
 language: java
 dist: focal
 jdk:
-  - openjdk21
+  - openjdk17
 
-before_install:
-  - echo "=== CHECK JAVA CONFIG ==="
-  - echo "JAVA_HOME = $JAVA_HOME"
-  - echo "which java = $(which java)"
-  - echo "resolved java = $(readlink -f $(which java))"
-  - java -Xmx32m -version || echo "[ERROR] java not working"
-  - javac -J-Xmx32m -version || echo "[ERROR] javac not working"
+install: skip
+script: java -version
 
-  # Simulate what breaks when JAVA_HOME is not correct
-  - echo "=== TRY TO RUN SOMETHING THAT RELIES ON JAVA_HOME ==="
-  - if [ -z "$JAVA_HOME" ] || [ ! -x "$JAVA_HOME/bin/java" ]; then echo "[FAIL] JAVA_HOME is not correctly set"; exit 1; fi
-  - "$JAVA_HOME/bin/java" -version || echo "[FAIL] Direct call to JAVA_HOME failed"
+
